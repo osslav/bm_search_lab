@@ -89,6 +89,13 @@ int* String::createSymbolTable_(const String& word)
 
 void String::enterAnswer_(int firstSymbol, int endSymbol)
 {
+	if ((endSymbol < 0) || (firstSymbol < 0)) throw -1;
+	if (firstSymbol > endSymbol)
+	{
+		int swap = firstSymbol;
+		firstSymbol = endSymbol;
+		endSymbol = swap;
+	}
 	cout << "String in text find:\n";
 	for (int i = 0; i < length_; i++)
 	{
@@ -101,8 +108,16 @@ void String::enterAnswer_(int firstSymbol, int endSymbol)
 
 int main()
 {
-	String text("nranirarararararainininin");
-	String word("rain");
+	try
+	{
+		String text("nranirarararararainininin");
+		String word("rain");
 
-	return text.bmSearch(word);
+
+		return text.bmSearch(word);
+	}
+	catch(int error)
+	{
+		return error;
+	}
 }
